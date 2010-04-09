@@ -1,4 +1,5 @@
 <% form_for @memo do |form| %>
+  <%= form.label :text, 'New memo' %>
   <%= form.text_area :text %>
   <%= form.submit 'Remind Me' %>
 <% end %>
