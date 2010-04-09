@@ -1,0 +1,12 @@
+<div class="memo" id="memo_<%= @memo.id %>">
+  <%= link_to 'Write a new memo', new_memo_path %>
+  <span class="text"><%= h @memo.text %></span>
+  <% form_for @memo do |form| %>
+    <%= form.hidden_field :remembering, :value => true %>
+    <%= form.submit "I'm gettin it" %>
+  <% end %>
+  <% form_for @memo do |form| %>
+    <%= form.hidden_field :forgetting, :value => true %>
+    <%= form.submit 'Dang, I keep forgetting!' %>
+  <% end %>
+</div>
