@@ -1,0 +1,32 @@
+body {
+  padding: 1em;
+}
+
+a {
+  text-decoration: none;
+  color: #0000ff;
+}
+
+a:hover {
+  color: #6666ff;
+}
+
+a.new_memo {
+  margin-bottom: 1em;
+  float: right;
+}
+
+.memo .text {
+  clear: both;
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.memo form.remembering {
+  float: right;
+}
+
+.memo form.forgetting {
+  float: left;
+}
