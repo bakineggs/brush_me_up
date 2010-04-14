@@ -10,4 +10,9 @@ describe Memo do
   it "should create a new instance given valid attributes" do
     Memo.create!(@valid_attributes)
   end
+
+  it 'should require the text to be set' do
+    attributes = @valid_attributes.merge({:text => nil})
+    Memo.new(attributes).should_not be_valid
+  end
 end

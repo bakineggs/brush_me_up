@@ -1,4 +1,5 @@
 class Memo < ActiveRecord::Base
+  validates_presence_of :text
   before_create :set_repeat_at
 
   def self.next
