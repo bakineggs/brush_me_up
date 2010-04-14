@@ -41,6 +41,16 @@ describe Memo do
     memo.repeat_at.should > Time.now
   end
 
+  it 'should provide the next memo' do
+    memos = []
+    (1+rand(4)).times do
+      memo = Memo.create! @valid_attributes
+      train [memo]
+      memos.push memo
+    end
+    Memo.next.should == memos.sort_by(&:repeat_at).first
+  end
+
   def train memos
     rand(5).times do
       if rand < 0.5
