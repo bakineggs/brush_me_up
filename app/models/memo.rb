@@ -18,6 +18,9 @@ class Memo < ActiveRecord::Base
   end
 
   private
+    attr_accessor :interval, :learning_rate
+    attr_writer :repeat_at
+
     def set_repeat_at
       self.repeat_at = Time.now
     end
