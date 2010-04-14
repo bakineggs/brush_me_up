@@ -25,10 +25,20 @@ describe Memo do
     repeat1 = memo1.repeat_at
     repeat2 = memo2.repeat_at
 
+    Time.stub!(:now).and_return([repeat1, repeat2].max)
+
     memo1.forgetting!
     memo2.remembering!
 
     (memo2.repeat_at - repeat2).should > (memo1.repeat_at - repeat1)
+  end
+
+  it 'should always set the next repeat_at in the future' do
+    memo = Memo.create! @valid_attributes
+    first_repeat = memo.repeat_at
+    Time.stub!(:now).and_return(first_repeat + 1.month)
+    memo.forgetting!
+    memo.repeat_at.should > Time.now
   end
 
   def train memos
