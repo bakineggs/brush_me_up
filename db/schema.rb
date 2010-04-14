@@ -9,12 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100409063005) do
+ActiveRecord::Schema.define(:version => 20100414212744) do
 
   create_table "memos", :force => true do |t|
     t.text     "text"
     t.datetime "repeat_at"
-    t.integer  "interval",      :default => 86400
+    t.integer  "interval",      :default => 259200
     t.float    "learning_rate", :default => 1.0
   end
 
