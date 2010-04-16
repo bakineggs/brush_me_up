@@ -25,5 +25,6 @@ class MemosController < ApplicationController
 
   def index
     @memo = Memo.next
+    @to_go = Memo.to_go
   end
 end

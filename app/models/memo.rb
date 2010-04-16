@@ -6,6 +6,10 @@ class Memo < ActiveRecord::Base
     first :order => :repeat_at
   end
 
+  def self.to_go
+    count :conditions => ['repeat_at <= ?', Time.now.utc]
+  end
+
   def forgetting!
     self.learning_rate -= 0.2 if learning_rate > 1.5
     self.learning_rate -= 0.1
