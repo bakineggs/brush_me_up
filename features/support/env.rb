@@ -25,6 +25,19 @@ Spork.prefork do
     config.open_error_files = false # Set to true if you want error pages to pop up in the browser
   end
   
+  require "spec/mocks"
+
+  Before do
+    $rspec_mocks ||= Spec::Mocks::Space.new
+  end
+
+  After do
+    begin
+      $rspec_mocks.verify_all
+    ensure
+      $rspec_mocks.reset_all
+    end
+  end
 
 end
  
