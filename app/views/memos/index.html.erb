@@ -2,8 +2,8 @@
   <div class="notification"><%= flash[:notice] %></div>
 <% end %>
 <%= link_to 'Write a new memo', new_memo_path, :class => 'new_memo' %>
+<h1>Next Memo:</h1>
 <% if @memo %>
-  <h1>Next Memo:</h1>
   <div class="memo" id="memo_<%= @memo.id %>">
     <div class="text"><%= h @memo.text %></div>
     <% form_for @memo, :html => { :class => 'remembering' } do |form| %>
