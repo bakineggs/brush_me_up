@@ -1,8 +1,9 @@
-<%= link_to 'Write a new memo', new_memo_path, :class => 'new_memo' %>
 <% if flash[:notice] %>
   <div class="notification"><%= flash[:notice] %></div>
 <% end %>
+<%= link_to 'Write a new memo', new_memo_path, :class => 'new_memo' %>
 <% if @memo %>
+  <h1>Next Memo:</h1>
   <div class="memo" id="memo_<%= @memo.id %>">
     <div class="text"><%= h @memo.text %></div>
     <% form_for @memo, :html => { :class => 'remembering' } do |form| %>
@@ -21,4 +22,7 @@
 <% end %>
 <div id="to_go">
   <span class="count"><%= h @to_go %></span> left to go!
+  <% if @to_go == 0 %>
+    <span id="brushed_up">You're all brushed up!</span>
+  <% end %>
 </div>

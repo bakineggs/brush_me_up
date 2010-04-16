@@ -2,6 +2,18 @@ body {
   padding: 1em;
 }
 
+h1 {
+  float: left;
+  margin: 0 0 .5em;
+}
+
+.notification {
+  border: 1px solid #0f0;
+  background-color: #cfc;
+  padding: 0.5em;
+  margin-bottom: 2em;
+}
+
 a {
   text-decoration: none;
   color: #0000ff;
@@ -12,19 +24,22 @@ a:hover {
 }
 
 a.new_memo {
-  margin-bottom: 1em;
   float: right;
+  clear: both;
+  font-size: 120%;
+  margin-top: .5em;
 }
 
 .memo .text {
   clear: both;
   border: 1px solid #ccc;
   padding: 1em;
-  margin-bottom: 1em;
+  margin: 1em 0;
 }
 
 .memo form.remembering {
   float: right;
+  margin-bottom: 1em;
 }
 
 .memo form.forgetting {
@@ -41,4 +56,19 @@ form.new_memo textarea {
   height: 10em;
   border: 1px solid #ccc;
   margin: 1em 0;
+}
+
+#to_go {
+  clear: both;
+  float: right;
+  font-size: 120%;
+  text-align: right;
+}
+
+#to_go .count {
+  color: #f00;
+}
+
+#to_go #brushed_up {
+  display: block;
 }
