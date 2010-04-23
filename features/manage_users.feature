@@ -9,3 +9,17 @@ Feature: Manage users
     And I fill in "smells" for "Password"
     And I press "Save"
     Then I should see "Change Username / Password"
+
+  Scenario: Log in
+    Given a username and password
+    And I am on the home page
+    When I follow "Log In"
+    And I fill in the username and password
+    And I press "Log In"
+    Then I should see "Log Out"
+
+  Scenario: Log Out
+    Given I am logged in
+    And I am on the home page
+    When I follow "Log Out"
+    Then I should see "Log In"

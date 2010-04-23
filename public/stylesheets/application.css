@@ -72,3 +72,9 @@ form.new_memo textarea {
 #to_go #brushed_up {
   display: block;
 }
+
+a.edit_user, a.log_in, a.log_out {
+  clear: left;
+  float: left;
+  margin-bottom: 1em;
+}

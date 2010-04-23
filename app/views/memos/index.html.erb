@@ -47,3 +47,10 @@
     link_to 'Change Username / Password', edit_user_path(current_user), :class => 'edit_user'
   end
 %>
+<%=
+  if current_user.login.nil?
+    link_to 'Log In', edit_user_session_path(current_user), :class => 'log_in'
+  else
+    link_to 'Log Out', user_session_path(current_user), :method => :delete, :class => 'log_out'
+  end
+%>
