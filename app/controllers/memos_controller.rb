@@ -1,16 +1,16 @@
 class MemosController < ApplicationController
   def new
-    @memo = Memo.new
+    @memo = memos.new
   end
 
   def create
-    @memo = Memo.create :text => params[:memo][:text]
+    @memo = memos.create :text => params[:memo][:text]
     flash[:notice] = "We'll make sure you remember that"
     redirect_to :action => :index
   end
 
   def update
-    @memo = Memo.find params[:id]
+    @memo = memos.find params[:id]
 
     if params[:memo][:remembering]
       @memo.remembering!
@@ -24,7 +24,12 @@ class MemosController < ApplicationController
   end
 
   def index
-    @memo = Memo.next
-    @to_go = Memo.to_go
+    @memo = memos.first
+    @to_go = memos.to_go.count
   end
+
+  private
+    def memos
+      current_user.memos
+    end
 end

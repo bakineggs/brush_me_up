@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Memo do
   before :each do
     @valid_attributes = {
-      :text => 'something i want to remember'
+      :text => 'something i want to remember',
+      :user => User.create!
     }
   end
 
@@ -42,13 +43,10 @@ describe Memo do
   end
 
   it 'should provide the next memo' do
-    memos = []
-    (1+rand(4)).times do
-      memo = Memo.create! @valid_attributes
-      train [memo]
-      memos.push memo
-    end
-    Memo.next.should == memos.sort_by(&:repeat_at).first
+    user = User.create!
+    (1+rand(4)).times { Memo.create! @valid_attributes.merge({:user => user}) }
+    train user.memos
+    user.memos.first.should == user.memos.sort_by(&:repeat_at).first
   end
 
   def train memos

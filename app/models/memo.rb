@@ -1,14 +1,11 @@
 class Memo < ActiveRecord::Base
-  validates_presence_of :text
+  belongs_to :user
+  validates_presence_of :user_id, :text
   before_create :set_repeat_at
 
-  def self.next
-    first :order => :repeat_at
-  end
-
-  def self.to_go
-    count :conditions => ['repeat_at <= ?', Time.now.utc]
-  end
+  named_scope :to_go, lambda {
+    { :conditions => ['repeat_at <= ?', Time.now.utc] }
+  }
 
   def forgetting!
     self.learning_rate -= 0.2 if learning_rate > 1.5

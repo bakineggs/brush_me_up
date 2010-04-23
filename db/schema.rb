@@ -9,13 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100414212744) do
+ActiveRecord::Schema.define(:version => 20100423070055) do
 
   create_table "memos", :force => true do |t|
     t.text     "text"
     t.datetime "repeat_at"
     t.integer  "interval",      :default => 259200
     t.float    "learning_rate", :default => 1.0
+    t.integer  "user_id"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "persistence_token", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
