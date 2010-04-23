@@ -2,7 +2,7 @@
   <div class="notification"><%= flash[:notice] %></div>
 <% end %>
 <%= link_to 'Write a new memo', new_memo_path, :class => 'new_memo' %>
-<h1>Next Memo:</h1>
+<h1>Brush Me Up</h1>
 <% if @memo %>
   <div class="memo" id="memo_<%= @memo.id %>">
     <div class="text"><%= h @memo.text %></div>
@@ -15,14 +15,14 @@
       <%= form.submit 'Dang, I keep forgetting!' %>
     <% end %>
   </div>
+  <div id="to_go">
+    <span class="count"><%= h @to_go %></span> left to go!
+    <% if @to_go == 0 %>
+      <span id="brushed_up">You're all brushed up!</span>
+    <% end %>
+  </div>
 <% else %>
   <div class="memo" id="no_memos">
     <div class="text">You should write a memo.</div>
   </div>
 <% end %>
-<div id="to_go">
-  <span class="count"><%= h @to_go %></span> left to go!
-  <% if @to_go == 0 %>
-    <span id="brushed_up">You're all brushed up!</span>
-  <% end %>
-</div>
