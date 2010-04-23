@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100423070055) do
+ActiveRecord::Schema.define(:version => 20100423104452) do
 
   create_table "memos", :force => true do |t|
     t.text     "text"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(:version => 20100423070055) do
     t.string   "persistence_token", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "login"
+    t.string   "crypted_password"
+    t.string   "password_salt"
   end
 
 end

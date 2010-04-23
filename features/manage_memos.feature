@@ -27,4 +27,4 @@ Feature: Manage memos
   Scenario: Only see my memos
     Given some other peoples' memos
     And I am on the home page
-    Then I should see "You should write a memo"
+    Then I should see "Just write a memo"

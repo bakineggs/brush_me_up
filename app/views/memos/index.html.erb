@@ -5,7 +5,7 @@
 <h1>Brush Me Up</h1>
 <% if @memo %>
   <div class="memo" id="memo_<%= @memo.id %>">
-    <div class="text"><%= h @memo.text %></div>
+    <div class="text"><%= simple_format h(@memo.text) %></div>
     <% form_for @memo, :html => { :class => 'remembering' } do |form| %>
       <%= form.hidden_field :remembering, :value => true %>
       <%= form.submit "I'm gettin it" %>
@@ -23,6 +23,27 @@
   </div>
 <% else %>
   <div class="memo" id="no_memos">
-    <div class="text">You should write a memo.</div>
+    <div class="text">
+      <p>Welcome to Brush Me Up!</p>
+      <% if current_user.login.nil? %>
+        <p>
+          If you're a returning user with a username and password, you can log in to view your memos.
+          Otherwise, you can start writing memos now and save them with a username and password whenever you'd like.
+        </p>
+      <% end %>
+      <p>
+        Brush Me Up uses <a href="http://en.wikipedia.org/wiki/Spaced_repetition">spaced repetition</a> to aid people in retaining information.
+        Just write a memo you'd like to remember and it will be shown to you every so often.
+        When shown a memo, you can say how well you're remembering it so we know how soon to show it again.
+        Memos can be quotations, song lyrics, birthdays, math formulas...whatever it is you always seem to forget.
+      </p>
+    </div>
   </div>
 <% end %>
+<%=
+  if current_user.login.nil?
+    link_to 'Choose Username and Password', edit_user_path(current_user), :class => 'edit_user no_login'
+  else
+    link_to 'Change Username / Password', edit_user_path(current_user), :class => 'edit_user'
+  end
+%>

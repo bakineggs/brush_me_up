@@ -33,7 +33,7 @@ a.new_memo {
 .memo .text {
   clear: both;
   border: 1px solid #ccc;
-  padding: 1em;
+  padding: 0 1em;
   margin: 1em 0;
 }
 
@@ -43,7 +43,7 @@ a.new_memo {
 }
 
 .memo form.forgetting {
-  float: left;
+  margin-bottom: 1em;
 }
 
 form.new_memo label {

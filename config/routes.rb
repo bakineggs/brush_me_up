@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :memos
+  map.resources :memos, :users
 
   map.root :controller => :memos
 end
