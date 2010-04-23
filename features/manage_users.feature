@@ -23,3 +23,12 @@ Feature: Manage users
     And I am on the home page
     When I follow "Log Out"
     Then I should see "Log In"
+
+  Scenario: Absorb Login-less account when logging in
+    Given I have some old memos
+    And a username and password
+    And I am on the home page
+    When I follow "Log In"
+    And I fill in the username and password
+    And I press "Log In"
+    Then I should have memos left to view

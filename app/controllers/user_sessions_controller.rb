@@ -6,8 +6,10 @@ class UserSessionsController < ApplicationController
   def update
     @user_session = UserSession.new params[:user_session]
     if @user_session.valid?
+      old_user = current_user
       current_user_session.destroy
       @user_session.save
+      @user_session.user.absorb old_user
       redirect_to :controller => :memos, :action => :index
     else
       render :action => :edit

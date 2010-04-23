@@ -17,3 +17,8 @@ When 'I fill in the username and password' do
   fill_in 'Login', :with => @login
   fill_in 'Password', :with => @password
 end
+
+Then 'I should have memos left to view' do
+  doc = Nokogiri::HTML response.body
+  doc.at_css('#to_go .count').content.to_i.should > 0
+end
