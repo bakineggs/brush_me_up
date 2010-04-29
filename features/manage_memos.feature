@@ -6,7 +6,7 @@ Feature: Manage memos
     Given I am on the home page
     When I follow "Write a new memo"
     And I fill in "some fact" for "New memo"
-    And I press "Remind me"
+    And I press "Remind Me"
     Then I should see "We'll make sure you remember that"
     And I should see "some fact"
 

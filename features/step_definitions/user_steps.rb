@@ -19,6 +19,5 @@ When 'I fill in the username and password' do
 end
 
 Then 'I should have memos left to view' do
-  doc = Nokogiri::HTML response.body
-  doc.at_css('#to_go .count').content.to_i.should > 0
+  locate('#to_go .count').text.to_i.should > 0
 end

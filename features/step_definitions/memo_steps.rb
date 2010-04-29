@@ -1,7 +1,9 @@
 Given 'I found my user account' do
   unless @user
     Given 'I am on the home page'
-    @user = User.find_by_persistence_token response.session['user_credentials']
+    cookies = page.driver.instance_variable_get('@_rack_mock_sessions')[:default].cookie_jar.instance_variable_get('@cookies')
+    user_credentials = cookies.find {|cookie| cookie.name == 'user_credentials'}.value.sub(/::1$/,'')
+    @user = User.find_by_persistence_token user_credentials
   end
 end
 
@@ -54,16 +56,13 @@ end
 
 Then 'I should be told how many memos are left to see' do
   count = Memo.count :conditions => ['repeat_at <= ?', Time.now.utc]
-  doc = Nokogiri::HTML response.body
-  doc.at_css('#to_go .count').content.should == count.to_s
+  locate('#to_go .count').text.should == count.to_s
 end
 
 Then 'there should be one less memo left to view' do
-  doc = Nokogiri::HTML response.body
-  doc.at_css('#to_go .count').content.should == (@before_count - 1).to_s
+  locate('#to_go .count').text.should == (@before_count - 1).to_s
 end
 
 Then 'there should be more memos left to view' do
-  doc = Nokogiri::HTML response.body
-  doc.at_css('#to_go .count').content.to_i.should > @before_count
+  locate('#to_go .count').text.to_i.should > @before_count
 end
