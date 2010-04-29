@@ -1,9 +1,7 @@
 Given 'I found my user account' do
   unless @user
-    Given 'I am on the home page'
-    cookies = page.driver.instance_variable_get('@_rack_mock_sessions')[:default].cookie_jar.instance_variable_get('@cookies')
-    user_credentials = cookies.find {|cookie| cookie.name == 'user_credentials'}.value.sub(/::1$/,'')
-    @user = User.find_by_persistence_token user_credentials
+    Given 'I am on the home page' # ensure the implicit account is made
+    @user = User.first # would be better if I had a consistent way to get the token off the page
   end
 end
 
