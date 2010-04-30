@@ -13,17 +13,19 @@ Feature: Manage memos
     And I should see "some fact"
 
   Scenario: Seeing a memo and remembering it
-    Given my memo "some fact"
+    Given my memos "some fact" and "some other fact"
     And I am on the home page
     Then I should see "some fact"
     And the page should not change again
     When I press "I'm gettin it"
     Then I should see "We'll remind you less often"
+    And I should see "some other fact"
 
   Scenario: Seeing a memo and not remembering it
-    Given my memo "some fact"
+    Given my memos "some fact" and "some other fact"
     And I am on the home page
     Then I should see "some fact"
     And the page should not change again
     When I press "Dang, I keep forgetting!"
     Then I should see "We'll remind you more often"
+    And I should see "some other fact"
