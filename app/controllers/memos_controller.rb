@@ -6,7 +6,7 @@ class MemosController < ApplicationController
   def create
     @memo = memos.create :text => params[:memo][:text]
     flash[:notice] = "We'll make sure you remember that"
-    redirect_to :action => :index
+    redirect_to :root
   end
 
   def update
@@ -20,7 +20,13 @@ class MemosController < ApplicationController
       flash[:notice] = "We'll remind you more often"
     end
 
-    redirect_to :action => :index
+    respond_to do |format|
+      format.html { redirect_to :root }
+      format.json do
+        flash.discard :notice
+        @next_memo = memos(true).first
+      end
+    end
   end
 
   def index
@@ -29,7 +35,7 @@ class MemosController < ApplicationController
   end
 
   private
-    def memos
-      current_user.memos
+    def memos reload = false
+      current_user.memos reload
     end
 end

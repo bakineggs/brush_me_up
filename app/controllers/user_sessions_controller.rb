@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
       current_user_session.destroy
       @user_session.save
       @user_session.user.absorb old_user
-      redirect_to :controller => :memos, :action => :index
+      redirect_to :root
     else
       render :action => :edit
     end
@@ -18,6 +18,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    redirect_to :controller => :memos, :action => :index
+    redirect_to :root
   end
 end
