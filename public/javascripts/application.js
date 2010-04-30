@@ -7,7 +7,7 @@ $(document).ready(function() {
   notification_timeouts = [];
   $.each(['remembering', 'forgetting'], function(index, update) {
     $('form.' + update).submit(function() {
-      $('div.notification').slideUp('fast');
+      $('div.notification').slideUp('fast', function() { $(this).remove(); });
       notification_timeouts.map(clearTimeout);
       var memo = {}
       memo[update] = true;
@@ -23,7 +23,7 @@ $(document).ready(function() {
           $('form.remembering, form.forgetting').attr('action', response.next_memo.action);
           $('form.remembering input[type=submit], form.forgetting input[type=submit]').attr('disabled', '');
           notification.slideDown();
-          notification_timeouts.push(setTimeout("$('div.notification').slideUp()", 3000));
+          notification_timeouts.push(setTimeout("$('div.notification').slideUp(function() { $(this).remove(); })", 3000));
         }
       });
       return false;
