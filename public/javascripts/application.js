@@ -23,6 +23,11 @@ $(document).ready(function() {
           $('.memo .text').html(response.next_memo.text);
           $('form.remembering, form.forgetting').attr('action', response.next_memo.action);
           $('form.remembering input[type=submit], form.forgetting input[type=submit]').attr('disabled', '');
+          var to_go = parseInt($('#to_go .count').html());
+          if (to_go > 0) {
+            to_go--;
+            $('#to_go .count').html(to_go);
+          }
           notification.slideDown();
           notification_timeouts.push(setTimeout("$('div.notification').slideUp(function() { $(this).remove(); })", 3000));
         }
