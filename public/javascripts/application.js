@@ -7,6 +7,7 @@ $(document).ready(function() {
   notification_timeouts = [];
   $.each(['remembering', 'forgetting'], function(index, update) {
     $('form.' + update).submit(function() {
+      $('form.remembering input[type=submit], form.forgetting input[type=submit]').attr('disabled', 'disabled');
       $('div.notification').slideUp('fast', function() { $(this).remove(); });
       notification_timeouts.map(clearTimeout);
       var memo = {}
@@ -28,5 +29,36 @@ $(document).ready(function() {
       });
       return false;
     });
+  });
+
+  $('a.new_memo').click(function() {
+    $('form.new_memo').show();
+    return false;
+  });
+
+  $('form.new_memo a.cancel').click(function() {
+    $('form.new_memo').hide();
+    return false;
+  });
+
+  $('form.new_memo').submit(function() {
+    $('form.new_memo input[type=submit]').attr('disabled', 'disabled');
+    $('div.notification').slideUp('fast', function() { $(this).remove(); });
+    notification_timeouts.map(clearTimeout);
+    $('form.new_memo').hide();
+    $.ajax({
+      type: 'POST',
+      url: $('form.new_memo').attr('action'),
+      dataType: 'json',
+      data: { memo: { text: $('form.new_memo textarea').val() } },
+      success: function(response) {
+        var notification = $(document.createElement('div')).addClass('notification').html(response.notice);
+        $('body').prepend(notification.hide());
+        $('form.new_memo input[type=submit]').attr('disabled', '');
+        notification.slideDown();
+        notification_timeouts.push(setTimeout("$('div.notification').slideUp(function() { $(this).remove(); })", 3000));
+      }
+    });
+    return false;
   });
 });

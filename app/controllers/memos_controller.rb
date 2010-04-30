@@ -6,7 +6,14 @@ class MemosController < ApplicationController
   def create
     @memo = memos.create :text => params[:memo][:text]
     flash[:notice] = "We'll make sure you remember that"
-    redirect_to :root
+
+    respond_to do |format|
+      format.html { redirect_to :root }
+      format.json do
+        flash.discard :notice
+        render :json => { :notice => flash[:notice] }
+      end
+    end
   end
 
   def update

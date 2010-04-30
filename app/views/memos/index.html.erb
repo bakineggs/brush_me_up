@@ -1,6 +1,12 @@
 <% if flash[:notice] %>
   <div class="notification"><%= flash[:notice] %></div>
 <% end %>
+<% form_for Memo.new do |form| %>
+  <%= form.label :text, 'New memo' %>
+  <%= form.text_area :text %>
+  <%= form.submit 'Remind Me' %>
+  <%= link_to 'Cancel', '#', :class => 'cancel' %>
+<% end %>
 <%= link_to 'Write a new memo', new_memo_path, :class => 'new_memo' %>
 <h1>Brush Me Up</h1>
 <% if @memo %>

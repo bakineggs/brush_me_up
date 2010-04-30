@@ -46,6 +46,21 @@ a.new_memo {
   margin-bottom: 1em;
 }
 
+body.memos.index form.new_memo {
+  display: none;
+  position: absolute;
+  width: 50%;
+  margin: 1em 20%;
+  padding: 1em;
+  z-index: 1;
+  background-color: #fff;
+  border: 3px outset #ccc;
+}
+
+body.memos.index form.new_memo a.cancel {
+  margin-left: 1em;
+}
+
 form.new_memo label {
   display: block;
   font-size: 1.5em;
