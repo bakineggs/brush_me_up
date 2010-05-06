@@ -13,7 +13,7 @@ Given 'I have three old memos' do
 end
 
 Then 'the page should not change again' do
-  evaluate_script('window.onunload = function() { window.stop(); }')
+  evaluate_script('window.onunload = window.stop')
 end
 
 Then 'there should be one memo left to view' do
